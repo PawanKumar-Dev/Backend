@@ -1,0 +1,19 @@
+{
+  "name": "01_backend",
+  "version": "1.0.0",
+  "description": "just node app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "node.js",
+    "backend"
+  ],
+  "author": "Pawan",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
