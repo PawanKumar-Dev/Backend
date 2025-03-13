@@ -31,4 +31,8 @@
     - By listening to 3000, we are directing our server to use that "channel" for handling all its HTTP traffic.
 
 
+- When trying to use ES6 module syntax of "import" in Express.js.
+  - Mention "type" : "module" in your pacakge.json file.
+
+
 - Note: Never forget to put "/" before any url you pass.
