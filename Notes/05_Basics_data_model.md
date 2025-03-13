@@ -1,4 +1,4 @@
-# Data Modelling Styles
+# Basic Data Model
 
 - We can have different data model styles in Mongoose.
 
@@ -26,7 +26,7 @@
   - like User will be renamed in DB as "users".
 
 
-- First modelling style will be where we simply define which data field need what data-type.
+- We can simply define which data field need what data-type.
   ```
   const userSchema = new mongoose.Schema({
     username : String,
@@ -39,28 +39,28 @@
 - But we can get into more details also with each field details in object notation.
   - This give us advance validations.
   ```
-  const customerSchema = new mongoose.Schema({
-      username: {
-          type: String,
-          required: true,
-          unique: true
-        },
-      password: {
-          type: String,
-          required: true,
-          min: [6, "Password length should 6 minimum"]
-        }
+  const loginSchema = new mongoose.Schema({
+    username: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    password: {
+      type: String,
+      required: true,
+      min: [6, "Password length should 6 minimum"]
+    }
   })
   ```
 
 - Beside normal data types, we also get "timestamp".
   - This give us "createdAt" and "updatedAt" fields.
   ```
-  const customerSchema = new mongoose.Schema({
+  const loginSchema = new mongoose.Schema({
     username: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true
     }
   }, { timestamps: true })
   ```
