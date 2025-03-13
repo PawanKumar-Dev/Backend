@@ -10,3 +10,13 @@
     - Middleware and Hooks
     - Relationship Modeling
     - Query Building and Abstraction
+
+
+- Install mongoose with:
+  ```
+  npm install mongoose
+  ```
+
+
+- There are GUI tools for Data Modelling like "Moon Modeler" or "Eraser.io".
+    - These tools graphical and easy representation of models.

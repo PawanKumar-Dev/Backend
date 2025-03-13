@@ -1,0 +1,15 @@
+{
+  "name": "03_modelling",
+  "version": "1.0.0",
+  "description": "basics of Mongoose Models Styles",
+  "license": "ISC",
+  "author": "Pawan",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mongoose": "^8.12.1"
+  }
+}
