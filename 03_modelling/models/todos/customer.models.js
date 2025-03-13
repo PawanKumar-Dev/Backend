@@ -11,6 +11,6 @@ const customerSchema = new mongoose.Schema({
         required: true,
         min: [6, "Password length should 6 minimum"]
     }
-})
+}, { timestamps: true })
 
 export const Customer = mongoose.model("Customer", customerSchema)

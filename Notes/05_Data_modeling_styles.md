@@ -53,4 +53,17 @@
   })
   ```
 
+- Beside normal data types, we also get "timestamp".
+  - This give us "createdAt" and "updatedAt" fields.
+  ```
+  const customerSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    }
+  }, { timestamps: true })
+  ```
+
+
 - 
