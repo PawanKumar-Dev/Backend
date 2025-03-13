@@ -10,7 +10,7 @@
   PORT=3000
   ```
 
-- In our main file, where we want use env variable, we import package and use it.
+- In our file, where we want use .env variables, we import the package and use it.
   ```
   require('dotenv').config()
 
@@ -18,3 +18,5 @@
     console.log(`Example app listening on port ${process.env.PORT}`)
   })
   ```
+
+- Do remember .env are private data. So avoid uploading and sharing it at Github like repo.
