@@ -66,4 +66,28 @@
   ```
 
 
-- 
+- We can also pass a value from one model to another model.
+  - "type: mongoose.Schema.Types.ObjectId" -- syntax to refer to another model
+  - ref: "User" -- here we pass ref of model which will be used as reference.
+
+  ```
+  const todoSchema = new mongoose.Schema({
+    content: {
+      type: String,
+      required: true
+    },
+    completed: {
+      type: Boolean,
+      default: false
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    subTodos: [
+      {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "SubTodo"
+      }
+    ]
+  }, { timestamps: true })
