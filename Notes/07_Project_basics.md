@@ -16,4 +16,8 @@
   },
   ```
 
-- 
+- Install "Prettier" package also for consistency. Also used as dev-dependency.
+  - "-D" is shorthand of "--save-dev"
+  ```
+  npm i -D prettier
+  ```
