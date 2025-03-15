@@ -8,3 +8,12 @@
   ```
   npm install --save-dev nodemon
   ```
+
+- Also modify "package.json" file acc to nodemon.
+  ```
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  ```
+
+- 
