@@ -21,3 +21,16 @@
   ```
   npm i -D prettier
   ```
+
+- Set basic config for Prettier in ".prettierrc" file
+  ```
+  {
+    "singleQuote" : false,
+    "bracketSpacing": true,
+    "tabWidth" : 2,
+    "trailingComma" : "es5",
+    "semi" : true
+  }
+  ```
+
+- Similar to ".gitignore", ".prettierignore" can be generated as well.
