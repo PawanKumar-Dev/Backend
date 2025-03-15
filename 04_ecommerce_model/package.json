@@ -1,0 +1,15 @@
+{
+  "name": "04_ecommerce_model",
+  "version": "1.0.0",
+  "description": "advnace ecommerce model",
+  "license": "ISC",
+  "author": "Pawan",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mongoose": "^8.12.1"
+  }
+}

@@ -53,6 +53,7 @@
   })
   ```
 
+
 - Beside normal data types, we also get "timestamp".
   - This give us "createdAt" and "updatedAt" fields.
   ```
