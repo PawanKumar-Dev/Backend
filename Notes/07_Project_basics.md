@@ -34,3 +34,9 @@
   ```
 
 - Similar to ".gitignore", ".prettierignore" can be generated as well.
+
+- "Directory Import" errors can be resolved by pointing to exact file and adding the corresponding file extension.
+  - For example:
+  ```
+  import connectDB from "./db/index.js"
+  ```
