@@ -1,4 +1,4 @@
-# Utils Functions
+# Utils Function - Route Handlers
 
 - Often we use Utils to create asynchronous error handler wrapper function for Express route handlers.
 
