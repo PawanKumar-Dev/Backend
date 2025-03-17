@@ -46,13 +46,7 @@
   ```
 
 
-
 - To handle cookies, we install cookie parser package from npm. Also install cors.
   ```
   npm i cookie-parser cors
-  ```
-
-- To tokenize our data we use jsonwebtoken pacakge.
-  ```
-  npm i jsonwebtoken
   ```

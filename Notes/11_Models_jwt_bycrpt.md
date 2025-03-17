@@ -24,4 +24,39 @@
   }
   ```
 
-- 
+- For tokens we use jsonwebtoken package.
+  ```
+  npm i jsonwebtoken
+  ```
+
+- To define Access Token and Refresh Token we use mongoose methods() function again.
+  ```
+  import jwt from 'jsonwebtoken'
+
+  userSchema.methods.generateAccessToken = async function () {
+    return await jwt.sign(
+      {
+        _id: this._id,
+        email: this.email,
+        username: this.username,
+        fullname: this.fullname
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      {
+        expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+      }
+    )
+  }
+
+  userSchema.methods.generateRefreshToken = async function () {
+    return await jwt.sign(
+      {
+          _id: this._id
+      },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+          expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+      }
+    )
+  }
+  ```
