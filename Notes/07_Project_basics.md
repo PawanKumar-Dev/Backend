@@ -47,10 +47,18 @@
 
 
 
-- To handle cookies, we install cookie parser package from npm.
+- To handle cookies, we install cookie parser package from npm. Also install cors.
   ```
-  npm i cookie-parser
+  npm i cookie-parser cors
   ```
 
 
-- Also install cors.
+- To encrypt password in future, we install package "bcrypt".
+  ```
+  npm i bcrypt
+  ```
+
+- To tokenize our data we use jsonwebtoken pacakge.
+  ```
+  npm i jsonwebtoken
+  ```
