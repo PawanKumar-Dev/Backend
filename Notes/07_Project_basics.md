@@ -44,3 +44,13 @@
   ```
   import connectDB from "./db/index.js"
   ```
+
+
+
+- To handle cookies, we install cookie parser package from npm.
+  ```
+  npm i cookie-parser
+  ```
+
+
+- Also install cors.
