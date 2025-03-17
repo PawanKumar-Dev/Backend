@@ -60,3 +60,5 @@
     )
   }
   ```
+
+- To secret key and expiry time, we use .env file
