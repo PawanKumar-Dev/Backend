@@ -17,6 +17,7 @@
   })
   ```
 
+
 - Using mongoose methods() function, we can define a custom function to check and verify our password.
   ```
   userSchema.methods.isPasswordCorrect = async function (password) {
@@ -24,10 +25,12 @@
   }
   ```
 
+
 - For tokens we use jsonwebtoken package.
   ```
   npm i jsonwebtoken
   ```
+
 
 - To define Access Token and Refresh Token we use mongoose methods() function again.
   ```
