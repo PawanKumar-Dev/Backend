@@ -52,3 +52,22 @@
 - PATCH: Make partial changes or updates to an existing resource.
   - Only fields that need to be updated are sent in request body.
   - More efficient if few fields need to be changed.
+
+
+- DELETE: Removes specific data from server.
+  - Typically sent through URL.
+  
+    ```
+    DELETE /user/123 HTTP/1.1
+    Host: www.example.com
+    ```
+
+
+- HEAD: Only returns HTTP Headers(metadata) from a request.
+  - Returns no body data.
+  - Useful when need to check info about a resource (like size or type) without waiting for whole content to be downloaded.
+    
+    ```
+    HEAD /index.html HTTP/1.1
+    Host: www.example.com
+    ```
