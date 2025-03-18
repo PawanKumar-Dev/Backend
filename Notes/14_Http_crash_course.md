@@ -50,7 +50,5 @@
 
 
 - PATCH: Make partial changes or updates to an existing resource.
+  - Only fields that need to be updated are sent in request body.
   - More efficient if few fields need to be changed.
-
-
-- 
