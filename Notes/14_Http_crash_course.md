@@ -32,8 +32,9 @@
     ```
  
 - POST: Send data to server to create new resource or update existing one.
-  - For e.g., submitting forms, uploading files etc.
+  - Used for submitting forms, uploading files etc.
   - Data is carried in body of request rather than URL.
+  - Usally not cached by default.
     
     ```
     POST /submit-form HTTP/1.1
@@ -43,5 +44,13 @@
 
     { "username": "user123", "password": "securePass" }
     ```
+
+- PUT: Replace an existing resource entirely with a new data.
+  - Like POST, new complete data is sent within the body.
+
+
+- PATCH: Make partial changes or updates to an existing resource.
+  - More efficient if few fields need to be changed.
+
 
 - 
