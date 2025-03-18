@@ -54,11 +54,11 @@
   userSchema.methods.generateRefreshToken = async function () {
     return await jwt.sign(
       {
-          _id: this._id
+        _id: this._id
       },
       process.env.REFRESH_TOKEN_SECRET,
       {
-          expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+        expiresIn: process.env.REFRESH_TOKEN_EXPIRY
       }
     )
   }
