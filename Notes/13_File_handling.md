@@ -1,4 +1,4 @@
-# File Handling - Multer
+# File Handling - Cloudinary & Multer
 
 - To host our files we use cloudinary service. Make an account and follow Node.js installation instructions.
   ```
@@ -22,6 +22,6 @@
   ```
   fs.unlinkSync(localFilePath)
   ```
-
+  
   - unlinkSync() method make sure our file unlinked synchronusly.
   - Remember, almost all file system never delete files. Just un-couple it, so it's beyond access. 
