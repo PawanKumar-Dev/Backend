@@ -21,20 +21,27 @@
 
 
 - HTTP methods are set of request types defined by the HTTP protocol.
-  - GET: Retrieve data from server without any side effects. Used to fetch and view content.
+
+- GET: Retrieve data from server without any side effects. Used to fetch and view content.
+  - Parameters are appended to the URL as query strings.
+  - Responses can be cached.
+    
     ```
     GET /search?query=javascript HTTP/1.1
     Host: www.example.com
     ```
+ 
+- POST: Send data to server to create new resource or update existing one.
+  - For e.g., submitting forms, uploading files etc.
+  - Data is carried in body of request rather than URL.
     
-  - POST: Send data to server to create new resource or update existing one. For e.g., submitting forms, uploading files etc.
-  ```
-  POST /submit-form HTTP/1.1
-  Host: www.example.com
-  Content-Type: application/json
-  Content-Length: 45
+    ```
+    POST /submit-form HTTP/1.1
+    Host: www.example.com
+    Content-Type: application/json
+    Content-Length: 45
 
-  { "username": "user123", "password": "securePass" }
-  ```
+    { "username": "user123", "password": "securePass" }
+    ```
 
-  - 
+- 
