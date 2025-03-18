@@ -71,3 +71,7 @@
     HEAD /index.html HTTP/1.1
     Host: www.example.com
     ```
+
+
+- OPTIONS: Discover which HTTP methods are supported by server for given URL.
+  - Server responds with "Allow header" that lists permitted methods (e.g., GET, POST).
