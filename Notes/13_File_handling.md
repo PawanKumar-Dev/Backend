@@ -10,4 +10,18 @@
   npm i multer
   ```
 
-- 
+- Next we put file uploading in "cloudinary.js" and put it in utils.
+  
+- "fs" is file system of Node.js which handles file related methods.   
+  ```
+  import fs from 'fs'
+  ```
+
+
+- We use "fs" to unlink/remove temp upload files from our server if cloudinary upload fails.
+  ```
+  fs.unlinkSync(localFilePath)
+  ```
+
+  - unlinkSync() method make sure our file unlinked synchronusly.
+  - Remember, almost all file system never delete files. Just un-couple it, so it's beyond access. 
