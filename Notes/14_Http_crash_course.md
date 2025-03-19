@@ -1,7 +1,7 @@
 # Http Crash Course
 
 - "HTTP" is a protocol that facilitates the exchange of information over the Internet.
-  - Simply, HTTP is language that client browser(or any application) communicate with server(or where data is stored).
+  - HTTP is language that client browser(or any app) communicate with server(or where data is stored).
 
 
 - HTTP operates on "Request-Response Model" where a client sends a request to the server, and server responds with right data.
