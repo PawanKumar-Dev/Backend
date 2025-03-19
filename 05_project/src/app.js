@@ -10,21 +10,12 @@ app.use(cors({
 }))
 
 app.use(express.json({ limit: "16kb" }))
-
 app.use(express.urlencoded({ extended: true, limit: "16kb" }))
-
 app.use(express.static("public"))
-
 app.use(cookieParser())
-
 
 // Routes Import
 import userRouter from './routes/user.routes.js'
-
-
-// Routes Declaration
 app.use("/api/v1/users", userRouter)
-
-// Our last url will be: http://localhost:8000/api/v1/users/register
 
 export default app
