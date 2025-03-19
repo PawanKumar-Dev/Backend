@@ -6,6 +6,7 @@
   app.use("/api/v1/users", userRouter)
   ```
 
+
 - In our "user.routes.js" file.
   ```
   import { Router } from 'express'
@@ -19,4 +20,8 @@
   ```
 
 
-- Then our final url will be: http://localhost:8000/api/v1/users/register
+- "http://localhost:8000/api/v1/users" will be base url.
+
+- And "register" will come from user router.
+
+- Then our final url will be: "http://localhost:8000/api/v1/users/register"
