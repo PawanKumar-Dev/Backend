@@ -25,3 +25,15 @@
 - And "register" will come from user router.
 
 - Then our final url will be: "http://localhost:8000/api/v1/users/register"
+
+- When testing with POSTMAN we use syntax:
+  ```
+  import asyncHandler from "../utils/asyncHandler.js"
+
+  const registerUser = asyncHandler(async (req, res) => {
+    res.status(200).json({
+      message: "ok"
+    })
+  })
+  export default registerUser
+  ```
