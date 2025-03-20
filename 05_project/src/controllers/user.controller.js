@@ -3,6 +3,7 @@ import ApiError from "../utils/ApiError.js"
 import { User } from "../models/user.models.js"
 import uploadToCloudinary from "../utils/cloudinary.js"
 import ApiRespnse from "../utils/ApiResponse.js"
+import jwt from 'jsonwebtoken'
 
 
 // Function that generate Access/Refresh Token
@@ -113,13 +114,13 @@ const loginUser = asyncHandler(async (req, res) => {
     })
 
     if (!user) {
-        throw new ApiError(404, "This user doesn't exist!")
+        throw new ApiError(404, "This user doesn't exist")
     }
 
     const isPasswordValid = await user.isPasswordCorrect(password)
 
     if (!isPasswordValid) {
-        throw new ApiError(401, "Your password is invalid!")
+        throw new ApiError(401, "Your password is wrong || Try agin")
     }
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
@@ -174,7 +175,44 @@ const logoutUser = asyncHandler(async (req, res) => {
 // Function to provide an endpoint for Frontend where "Refresh Token" is sent.
 // Then new "Access Token" is provided once verified
 const refreshAccessToken = asyncHandler(async (req, res) => {
-    
+    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
+
+    if (!incomingRefreshToken) {
+        throw new ApiError(401, "Unauthorized Request || Wrong Refresh Token")
+    }
+
+    const decodedToken = await jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET)
+
+    const user = await User.findById(decodedToken?._id)
+
+    if (!user) {
+        throw new ApiError(401, "Wrong User || User does not exist")
+    }
+
+    if (incomingRefreshToken !== user?.refreshToken) {
+        throw new ApiError(401, "Refresh token expired || Login Again")
+    }
+
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+
+    const { newAccessToken, newRefreshToken } = await generateAccessAndRefreshToken(user._id)
+
+    return res.status(200)
+        .cookie("accessToken", newAccessToken, options)
+        .cookie("refreshToken", newRefreshToken, options)
+        .json(
+            new ApiRespnse(
+                200,
+                {
+                    accessToken: newAccessToken,
+                    refreshToken: newRefreshToken
+                },
+                "Access Token Refreshed!"
+            )
+        )
 })
 
 
