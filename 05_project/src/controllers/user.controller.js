@@ -9,8 +9,8 @@ import ApiRespnse from "../utils/ApiResponse.js"
 const generateAccessAndRefreshToken = async (userId) => {
     try {
         const user = await User.findById(userId)
-        const accessToken = user.generateAccessToken()
-        const refreshToken = user.generateRefreshToken()
+        const accessToken = await user.generateAccessToken()
+        const refreshToken = await user.generateRefreshToken()
 
         user.refreshToken = refreshToken
         await user.save({ validateBeforeSave: false })
@@ -160,8 +160,8 @@ const logoutUser = asyncHandler(async (req, res) => {
     }
 
     return res.status(200)
-        .clearCookie(accessToken, options)
-        .clearCookie(refreshToken, options)
+        .clearCookie("accessToken", options)
+        .clearCookie("refreshToken", options)
         .json(new ApiRespnse(200, {}, "User Loggged Out!"))
 })
 
