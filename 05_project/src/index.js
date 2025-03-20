@@ -9,7 +9,6 @@ const port = process.env.PORT || 8000
 
 // Imported DB connection
 // Then started listening at the port
-
 connectDB()
     .then(() => {
         app.listen(port, () => {

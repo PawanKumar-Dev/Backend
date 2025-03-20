@@ -217,7 +217,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 
 
-//
+// Change Password after login
 const changeCurrentPassword = asyncHandler(async (req, res) => {
     const { oldPassword, newPassword, confPassword } = req.body
 
@@ -240,4 +240,10 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 })
 
 
-export { registerUser, loginUser, logoutUser, refreshAccessToken }
+// Get current user
+const getCurrentUser = asyncHandler(async (req, res) => {
+
+})
+
+
+export { registerUser, loginUser, logoutUser, refreshAccessToken, changeCurrentPassword }
