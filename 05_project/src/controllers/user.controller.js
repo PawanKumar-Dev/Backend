@@ -24,18 +24,22 @@ const generateAccessAndRefreshToken = async (userId) => {
 }
 
 
-// Register Methods
-const registerUser = asyncHandler(async (req, res) => {
-    // Get user details from frontend
-    // Validation - not empty
-    // Check if user already exist (by username and email)
-    // Check for images and avatar
-    // Upload them to cloudinary (Verify avatar upload)
+/*
+Pseodo Code:
+    - Get user details from frontend
+    - Validation - not empty
+    - Check if user already exist (by username and email)
+    - Check for images and avatar
+    - Upload them to cloudinary (Verify avatar upload)
 
-    // Create User object - create entry in DB
-    // Remove password and refresh token field from response
-    // Check for User creation
-    // Return response
+    - Create User object - create entry in DB
+    - Remove password and refresh token field from response
+    - Check for User creation
+    - Return response
+*/
+
+// User Register Method
+const registerUser = asyncHandler(async (req, res) => {
 
     const { username, email, fullname, password } = req.body
 
@@ -93,15 +97,18 @@ const registerUser = asyncHandler(async (req, res) => {
     )
 })
 
+/*
+Pseodo Code:
+    - Get userlogin input from Frontend
+    - If user doesn't exist, then throw error
+    - If user exist
+    - Validate login with password matching
+    - Then provide access/refresh tokens
+    - Send cookies
+*/
 
 // Login Function
 const loginUser = asyncHandler(async (req, res) => {
-    // Get userlogin input from Frontend
-    // If user doesn't exist, then throw error
-    // If user exist
-    // Validate login with password matching
-    // Then provide access/refresh tokens
-    // Send cookies
 
     const { email, username, password } = req.body
 
@@ -143,11 +150,15 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 
+/*
+Pseodo Code:
+    - Get User data via request id
+    - Then set refreshToken to undefined
+    - Also clear cookies
+*/
+
 // Logout Function
 const logoutUser = asyncHandler(async (req, res) => {
-    // Get User data via request id
-    // Then set refreshToken to undefined
-    // Also clear cookies
 
     await User.findByIdAndUpdate(
         req.user._id,
