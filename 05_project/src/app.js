@@ -4,10 +4,13 @@ import cookieParser from 'cookie-parser'
 
 const app = express()
 
+// Adds "Cors package" middleware to Express
+// Cors allows server to respond to requests coming from different origins/domains.
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
 }))
+
 
 // cookieParser package allow us to access/modify cookies in express.js
 app.use(cookieParser())
