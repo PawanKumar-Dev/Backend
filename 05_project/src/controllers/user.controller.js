@@ -6,7 +6,7 @@ import ApiRespnse from "../utils/ApiResponse.js"
 import jwt from 'jsonwebtoken'
 
 
-// Function that generate Access/Refresh Token
+// Methods that generate Access/Refresh Tokens
 const generateAccessAndRefreshToken = async (userId) => {
     try {
         const user = await User.findById(userId)
@@ -24,7 +24,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 }
 
 
-// Register Function
+// Register Methods
 const registerUser = asyncHandler(async (req, res) => {
     // Get user details from frontend
     // Validation - not empty
@@ -172,7 +172,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 
 
 
-// Function to provide an endpoint for Frontend where "Refresh Token" is sent.
+// Method to provide an endpoint for Frontend where "Refresh Token" is sent.
 // Then new "Access Token" is provided once verified
 const refreshAccessToken = asyncHandler(async (req, res) => {
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
@@ -213,6 +213,21 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
                 "Access Token Refreshed!"
             )
         )
+})
+
+
+
+//
+const changeCurrentPassword = asyncHandler(async (req, res) => {
+    const { oldPassword, newPassword } = req.body
+
+    const user = await User.findById(req.user?._id)
+
+    const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
+
+    if (!isPasswordCorrect) {
+        throw new ApiError(400, "Invalid old Password")
+    }
 })
 
 
