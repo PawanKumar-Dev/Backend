@@ -1,7 +1,7 @@
 import { v2 as cloudinary } from 'cloudinary'
 import fs from 'fs'
 
-//Cloudinary Config
+// Main Cloudinary Configuration
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -17,10 +17,13 @@ const uploadToCloudinary = async (localFilePath) => {
             resource_type: "auto"
         })
 
+        // After successful upload, files are unlinked synchronously
         fs.unlinkSync(localFilePath)
         return response
+
     } catch (error) {
-        // Unlink our temp file if uploading to Cloudinary fails
+
+        // Unlink our temp file if uploading to Cloudinary fails, synchronously
         fs.unlinkSync(localFilePath)
         return null
     }

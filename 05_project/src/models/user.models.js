@@ -46,12 +46,17 @@ const userSchema = new mongoose.Schema({
     ]
 }, { timestamps: true })
 
+
+// .pre() method allow you to do something before schema is executed by mongoose
+// Below we encrypted the password before saving it to mongoDB
+// Since encryption can take time we wrap it in "Async/Await"
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next()
 
     this.password = await bcrypt.hash(this.password, 10)
     next()
 })
+
 
 
 userSchema.methods.isPasswordCorrect = async function (password) {

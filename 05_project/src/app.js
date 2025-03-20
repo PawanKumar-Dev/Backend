@@ -9,12 +9,17 @@ app.use(cors({
     credentials: true
 }))
 
+// cookieParser package allow us to access/modify cookies in express.js
 app.use(cookieParser())
+
+// Explicit declartion that json format is valid/accepted by our server
 app.use(express.json({ limit: "16kb" }))
+
+// 
 app.use(express.urlencoded({ extended: true, limit: "16kb" }))
 app.use(express.static("public"))
 
-// Routes Import
+// Importing Routes
 import userRouter from './routes/user.routes.js'
 app.use("/api/v1/users", userRouter)
 
