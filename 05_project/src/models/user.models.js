@@ -48,6 +48,7 @@ const userSchema = new mongoose.Schema({
 
 
 // .pre() method allow you to do something before schema is executed by mongoose
+// "bycrpt package" is used for encryption
 // Below we encrypted the password before saving it to mongoDB
 // Since encryption can take time we wrap it in "Async/Await"
 userSchema.pre("save", async function (next) {
@@ -58,11 +59,15 @@ userSchema.pre("save", async function (next) {
 })
 
 
-
+// Using same "bycrpt" package
+// We check whether user inputted password is same as dbinserted password
 userSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
 
+
+// Using custom "methods" function of mongoose, we can define our own functions/methods
+// "generateAccessToken" methods allow us to generate access token via "jsonwebtoken package"
 userSchema.methods.generateAccessToken = async function () {
     return await jwt.sign(
         {
@@ -78,6 +83,8 @@ userSchema.methods.generateAccessToken = async function () {
     )
 }
 
+
+// Similar to "generateAccessToken" we generate refresh token
 userSchema.methods.generateRefreshToken = async function () {
     return await jwt.sign(
         {
