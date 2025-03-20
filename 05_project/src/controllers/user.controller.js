@@ -144,6 +144,10 @@ const loginUser = asyncHandler(async (req, res) => {
 
 // Logout Function
 const logoutUser = asyncHandler(async (req, res) => {
+    // Get User data via request id
+    // Then set refreshToken to undefined
+    // Also clear cookies
+
     await User.findByIdAndUpdate(
         req.user._id,
         {
@@ -164,5 +168,14 @@ const logoutUser = asyncHandler(async (req, res) => {
         .clearCookie("refreshToken", options)
         .json(new ApiRespnse(200, {}, "User Loggged Out!"))
 })
+
+
+
+// Function to provide an endpoint for Frontend where "Refresh Token" is sent.
+// Then new "Access Token" is provided once verified
+const refreshAccessToken = asyncHandler(async (req, res) => {
+    
+})
+
 
 export { registerUser, loginUser, logoutUser }
