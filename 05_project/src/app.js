@@ -13,16 +13,18 @@ app.use(cors({
 app.use(cookieParser())
 
 
-// Explicit declartion that json format is valid/accepted by our server
+// Express use built-in JSON parser middleware
+// Automatically parses incoming requests with JSON payloads(data)
+// Parsed data available on "req.body"
 app.use(express.json({ limit: "16kb" }))
 
 
-// Declartion to parse incoming request that are URL-encoded
-// Which is format for data submitted via HTML forms
+// Express parse incoming the requests that are URL-encoded
+// "URL-encoded" is format for data submitted via HTML forms
 app.use(express.urlencoded({ extended: true, limit: "16kb" }))
 
 
-// Declare our static asset folder
+// Express serve static files from the "public" folder.
 app.use(express.static("public"))
 
 
