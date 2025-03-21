@@ -278,6 +278,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
         { new: true }
     ).select("-password")
 
+    // Return response of Successful Update
     return res.status(200)
         .json(new ApiRespnse(
             200,
@@ -287,4 +288,83 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
 })
 
 
-export { registerUser, loginUser, logoutUser, refreshAccessToken, changeCurrentPassword, getCurrentUser, updateAccountDetails }
+// Update User Avatar
+const updateUserAvatar = asyncHandler(async (req, res) => {
+
+    // Getting local file path from multer middlerware when avatar image is uploaded
+    const avatarLocalPath = req.file?.path
+
+    // If avatar local file doesn't exist throw error
+    // For missing data, 400 (Bad Request) right error code.
+    if (!avatarLocalPath) {
+        throw new ApiError(400, "Avatar File is missing!")
+    }
+
+    // Upload avatar file to Cloudinary if no error present
+    const avatar = await uploadToCloudinary(avatarLocalPath)
+
+    // If avatar is not uploaded successfully, we have no avatar url. Log the error.
+    if (!avatar.url) {
+        throw new ApiError(401, "Avatar File failed to be uploaded to Cloudinary!")
+    }
+
+    // Set and updated new avatar url in MongoDb 
+    await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set: { avatar: avatar.url }
+        },
+        { new: true })
+        .select("-password")
+
+
+    return res.status(200).json(new ApiRespnse(200, "Avatar Updated Successfully!"))
+})
+
+
+// Update User Cover Image
+const updateUserCoverImage = asyncHandler(async (req, res) => {
+
+    // Getting local file path from multer middlerware when Cover image is uploaded
+    const coverImageLocalPath = req.file?.path
+
+    // If avatar local file doesn't exist throw error
+    // For missing data, 400 (Bad Request) right error code.
+    if (!coverImageLocalPath) {
+        throw new ApiError(400, "Cover Image is missing!")
+    }
+
+    // Upload avatar file to Cloudinary if no error present
+    const cover = await uploadToCloudinary(coverImageLocalPath)
+
+    // If avatar is not uploaded successfully, we have no avatar url. Log the error.
+    if (!cover.url) {
+        throw new ApiError(401, "Cover Image failed to be uploaded to Cloudinary!")
+    }
+
+    // req.user is provide by our 
+    // Set and updated new Cover image url in MongoDb
+    await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set: { coverImage: cover.url }
+        },
+        { new: true })
+        .select("-password")
+
+
+    return res.status(200).json(new ApiRespnse(200, "Cover Image Updated Successfully!"))
+})
+
+
+export {
+    registerUser,
+    loginUser,
+    logoutUser,
+    refreshAccessToken,
+    changeCurrentPassword,
+    getCurrentUser,
+    updateAccountDetails,
+    updateUserAvatar,
+    updateUserCoverImage
+}
