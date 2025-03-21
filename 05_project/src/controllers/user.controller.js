@@ -261,12 +261,17 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 
 // Update Current User Details
 const updateAccountDetails = asyncHandler(async (req, res) => {
+    
+    // Using object destructuring to extract fullname, email
+    // From req.body (which user sent from frontend to be updated) 
     const { fullname, email } = req.body
 
+    // Validation whether both "fullname" and "email" are provided.
     if (!fullname || !email) {
         throw new ApiError(400, "All fields required")
     }
 
+    // 
     const user = await User.findByIdAndUpdate(
         req.user?._id,
         {
@@ -303,10 +308,16 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     // Upload avatar file to Cloudinary if no error present
     const avatar = await uploadToCloudinary(avatarLocalPath)
 
-    // If avatar is not uploaded successfully, we have no avatar url. Log the error.
+
+    // If avatar is not uploaded, we have no avatar url. Log the error.
     if (!avatar.url) {
         throw new ApiError(401, "Avatar File failed to be uploaded to Cloudinary!")
     }
+
+
+    // req.user is provide by our auth middleware
+    // { new: true } ensures updated document is returned
+    // .select("-password")  ensures returned document will not include password field
 
     // Set and updated new avatar url in MongoDb 
     await User.findByIdAndUpdate(
@@ -317,6 +328,7 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
         { new: true })
         .select("-password")
 
+    // Return a success response
     return res.status(200).json(new ApiRespnse(200, "Avatar Updated Successfully!"))
 })
 
@@ -327,8 +339,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
     // Getting local file path from multer middlerware when Cover image is uploaded
     const coverImageLocalPath = req.file?.path
 
-    // If avatar local file doesn't exist throw error
-    // For missing data, 400 (Bad Request) right error code.
+    // If cover image localfile doesn't exist. Throw error.
     if (!coverImageLocalPath) {
         throw new ApiError(400, "Cover Image is missing!")
     }
@@ -336,12 +347,11 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
     // Upload avatar file to Cloudinary if no error present
     const cover = await uploadToCloudinary(coverImageLocalPath)
 
-    // If avatar is not uploaded successfully, we have no avatar url. Log the error.
+    // If avatar is not uploaded successfully, we have no Cover image url. Log the error.
     if (!cover.url) {
         throw new ApiError(401, "Cover Image failed to be uploaded to Cloudinary!")
     }
-
-    // req.user is provide by our "auth" middleware
+    
     // Set and updated new Cover image url in MongoDb
     await User.findByIdAndUpdate(
         req.user._id,
@@ -351,7 +361,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
         { new: true })
         .select("-password")
 
-
+    // Return a success response
     return res.status(200).json(new ApiRespnse(200, "Cover Image Updated Successfully!"))
 })
 
