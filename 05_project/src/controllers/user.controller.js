@@ -271,10 +271,10 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     // Auth middleware make sure our current user data is avaliable.
     return res
         .status(200)
-        .json(
+        .json(new ApiResponse(
             200,
             req.user,
-            "Current user fetched successfully"
+            "Current user fetched successfully")
         )
 })
 
