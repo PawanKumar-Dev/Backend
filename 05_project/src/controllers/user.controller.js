@@ -334,8 +334,8 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
         throw new ApiError(401, "Avatar File failed to be uploaded to Cloudinary!")
     }
 
-    // req.user is provide by our auth middleware
-    // { new: true } ensures updated document is returned
+    // req.user is provide by our auth middleware.
+    // { new: true } ensures updated document is returned instead of original one.
     // .select("-password") ensures when returning document. It will not include password field.
 
 
