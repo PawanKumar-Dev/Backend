@@ -2,7 +2,7 @@ import asyncHandler from "../utils/asyncHandler.js"
 import ApiError from "../utils/ApiError.js"
 import { User } from "../models/user.models.js"
 import uploadToCloudinary from "../utils/cloudinary.js"
-import ApiRespnse from "../utils/ApiResponse.js"
+import ApiResponse from "../utils/ApiResponse.js"
 import jwt from 'jsonwebtoken'
 
 
@@ -96,7 +96,7 @@ const registerUser = asyncHandler(async (req, res) => {
     return res
         .status(201)
         .json(
-            new ApiRespnse(200, createdUser, "User created successfully!")
+            new ApiResponse(200, createdUser, "User created successfully!")
         )
 })
 
@@ -146,7 +146,7 @@ const loginUser = asyncHandler(async (req, res) => {
     return res.status(200)
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
-        .json(new ApiRespnse(
+        .json(new ApiResponse(
             200,
             {
                 user: loggedInUser,
@@ -185,7 +185,7 @@ const logoutUser = asyncHandler(async (req, res) => {
         .status(200)
         .clearCookie("accessToken", options)
         .clearCookie("refreshToken", options)
-        .json(new ApiRespnse(200, {}, "User Loggged Out!"))
+        .json(new ApiResponse(200, {}, "User Loggged Out!"))
 })
 
 
@@ -222,7 +222,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         .cookie("accessToken", newAccessToken, options)
         .cookie("refreshToken", newRefreshToken, options)
         .json(
-            new ApiRespnse(
+            new ApiResponse(
                 200,
                 {
                     accessToken: newAccessToken,
@@ -257,7 +257,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(
-            new ApiRespnse(
+            new ApiResponse(
                 200,
                 {},
                 "Password Updated Successfully"
@@ -306,7 +306,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
 
     // Return response of Successful Update
     return res.status(200)
-        .json(new ApiRespnse(
+        .json(new ApiResponse(
             200,
             user,
             "Account details updated!"
@@ -317,7 +317,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
 // Update User Avatar
 const updateUserAvatar = asyncHandler(async (req, res) => {
 
-    // Getting local file path from multer middlerware when avatar image is uploaded
+    // Getting local filepath from multer when avatar image is uploaded
     const avatarLocalPath = req.file?.path
 
     // For missing data, 400 (Bad Request) right error code.
@@ -328,8 +328,6 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     // Upload avatar file to Cloudinary if no error present
     const avatar = await uploadToCloudinary(avatarLocalPath)
 
-
-    // If avatar is not uploaded, we have no avatar url. Log the error.
     if (!avatar.url) {
         throw new ApiError(401, "Avatar File failed to be uploaded to Cloudinary!")
     }
@@ -352,7 +350,7 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(
-            new ApiRespnse(
+            new ApiResponse(
                 200,
                 user,
                 "Avatar Updated Successfully!"
@@ -388,7 +386,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(
-            new ApiRespnse(
+            new ApiResponse(
                 200,
                 user,
                 "Cover Image Updated Successfully!"
