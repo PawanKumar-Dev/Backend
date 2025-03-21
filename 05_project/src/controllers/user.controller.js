@@ -9,13 +9,20 @@ import jwt from 'jsonwebtoken'
 // Methods that generate Access/Refresh Tokens
 const generateAccessAndRefreshToken = async (userId) => {
     try {
+        // Connect to DB and search user based on "userId"
         const user = await User.findById(userId)
+
+        // Access methods to generate tokens
         const accessToken = await user.generateAccessToken()
         const refreshToken = await user.generateRefreshToken()
 
         user.refreshToken = refreshToken
+
+        // "validateBeforeSave" disables Mongoose validations on save.
+        // This is used since only a single field (the refresh token) is being saved.
         await user.save({ validateBeforeSave: false })
 
+        // An object containing both access token and refresh token is returned. 
         return { accessToken, refreshToken }
 
     } catch (error) {
@@ -288,14 +295,18 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     // From req.body (which user sent from frontend to be updated) 
     const { fullname, email } = req.body
 
+
     // Validation whether both "fullname" and "email" are provided.
     if (!fullname || !email) {
         throw new ApiError(400, "All fields required")
     }
 
-    // 
+
+    // Updating User Document in MongoDB
+    // // To update user, we provide req.user._id
+    // Using MongoDB update operator "$set" to modify "fullname" and "email" fields.
     const user = await User.findByIdAndUpdate(
-        req.user?._id,
+        req.user._id,        
         {
             $set: {
                 fullname,
@@ -304,6 +315,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
         },
         { new: true }
     ).select("-password")
+
 
     // Return response of Successful Update
     return res.status(200)
