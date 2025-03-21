@@ -19,6 +19,7 @@ const generateAccessAndRefreshToken = async (userId) => {
         return { accessToken, refreshToken }
 
     } catch (error) {
+        // If error occur, 500 status code indicating Internal Server issue.
         throw new ApiError(500, "Something went wrong when generating Access and Refresh Token")
     }
 }
