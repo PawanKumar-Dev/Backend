@@ -317,7 +317,6 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
         { new: true })
         .select("-password")
 
-
     return res.status(200).json(new ApiRespnse(200, "Avatar Updated Successfully!"))
 })
 
@@ -342,7 +341,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
         throw new ApiError(401, "Cover Image failed to be uploaded to Cloudinary!")
     }
 
-    // req.user is provide by our 
+    // req.user is provide by our "auth" middleware
     // Set and updated new Cover image url in MongoDb
     await User.findByIdAndUpdate(
         req.user._id,
